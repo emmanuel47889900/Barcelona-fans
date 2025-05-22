@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FC Barcelona Fan Zone - Your ultimate source for all things FC Barcelona. News, stats, player highlights, and more!">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FC Barcelona Fan Zone</title>
+    <link rel="stylesheet" href="styles.css">
+    <button id="darkModeToggle">🌙 Dark Mode</button>
+
+    <script src="bar.js"></script> 
+    <script src="https://www.gstatic.com/bar.js/10.10.0/firebase-firestore.js"></script>
+    <script src="https://unpkg.com/i18next@21.6.3/i18next.min.js"></script>
+
+</script>
+<script type="module" src="server.js">
+
+</script>
+
+</select>
+
+<!-- 🧠 Translatable Content -->
+<h1 data-key="welcome"></h1>
+<p data-key="tagline"></p>
+<button data-key="joinNow"></button>
+
+
+
+
+   </head>
+<body>
+  <script>
+  function register() {
+    const email = document.getElementById("regEmail").value.trim();
+    const password = document.getElementById("regPassword").value.trim();
+    const message = document.getElementById("message");
+
+    if (!email || !password) {
+      message.innerText = "Please fill out both email and password fields.";
+      return;
+    }
+
+    // Simulate registration (You'd call your backend here)
+    console.log("Registering:", email, password);
+    message.innerText = "Registration successful (simulated)!";
+  }
+
+  function login() {
+    const email = document.getElementById("loginEmail").value.trim();
+    const password = document.getElementById("loginPassword").value.trim();
+    const message = document.getElementById("message");
+
+    if (!email || !password) {
+      message.innerText = "Both login fields are required.";
+      return;
+    }
+
+    // Simulate login (Replace this with real authentication)
+    console.log("Logging in:", email, password);
+    message.innerText = "Login successful (simulated)!";
+  }
+</script>
+
+    <header>
+        <div class="logo">FC Barcelona Fan Zone</div>
+        <nav>
+            <a href="#latest-news">News</a>
+            <a href="#standings">Standings</a>  
+            <a href="#players">Players</a>
+            <a href="#contact">Contact</a>
+            <a href="barcelona history.html"> History</a>
+
+        </nav>
+    </header>
+<head>
+  <title>Barça Fan Auth</title>
+</head>
+<body>
+  <script>
+    const API_URL = "http://localhost:3000"; // Change if deploying online
+
+    async function register() {
+      const email = document.getElementById("regEmail").value;
+      const password = document.getElementById("regPassword").value;
+      const res = await fetch(`${API_URL}/register`, {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+      const text = await res.text();
+      document.getElementById("message").innerText = text;
+    }
+
+    async function login() {
+      const email = document.getElementById("loginEmail").value;
+      const password = document.getElementById("loginPassword").value;
+      const res = await fetch(`${API_URL}/login`, {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+      const data = await res.json();
+      if (res.ok) {
+        localStorage.setItem("token", data.token);
+        document.getElementById("message").innerText = "Login successful!";
+      } else {
+        document.getElementById("message").innerText = data;
+      }
+    }
+  </script>
+
+    <script>
+      const hamburger = document.getElementById('hamburger');
+      const navLinks = document.getElementById('navLinks');
+    
+      hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('show');
+      });
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js"></script>
+    <script>
+      const db = firebase.firestore();
+    </script>
+    
+    <button id="scrollToTopBtn" title="Go to top">⬆️</button>
+
+    <!-- Hero Banner Section -->
+    <section class="hero-banner">
+        <div class="hero-overlay">
+            <h1>Welcome to Barça Fan Zone</h1>
+            <p>Your ultimate source for all things FC Barcelona</p>
+            <a href="#latest-news" class="hero-btn">Explore News</a>
+        </div>
+    </section>
+    <script>
+      document.getElementById("darkModeToggle").addEventListener("click", function () {
+        document.body.classList.toggle("dark-mode");
+        
+        // Optional: Save to localStorage
+        if (document.body.classList.contains("dark-mode")) {
+          localStorage.setItem("theme", "dark");
+        } else {
+          localStorage.setItem("theme", "light");
+        }
+      });
+      
+      // On page load, check saved preference
+      window.addEventListener("DOMContentLoaded", function () {
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme === "dark") {
+          document.body.classList.add("dark-mode");
+        }
+      });
+      </script>
+
+<!-- 🧠 Translatable Content -->
+<h1 data-key="welcome"></h1>
+<p data-key="tagline"></p>
+<button data-key="joinNow"></button>
+
+    <script>
+      const resources = {
+        en: {
+          translation: {
+            welcome: "Welcome to FC Barcelona Fan Zone",
+            tagline: "Your hub for the latest news, scores, and fan glory!",
+            joinNow: "Join Now"
+          }
+        },
+        es: {
+          translation: {
+            welcome: "Bienvenido a la Zona de Fans del FC Barcelona",
+            tagline: "Tu centro para las últimas noticias, resultados y gloria culé!",
+            joinNow: "Únete Ahora"
+          }
+        }
+      };
+      </script>
+<script>
+  i18next.init({
+    lng: localStorage.getItem('lang') || 'en',
+    debug: true,
+    resources
+  }, function(err, t) {
+    updateContent();
+  });
+  
+  function updateContent() {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      el.innerHTML = i18next.t(key);
+    });
+  }
+  </script>
+
+
+<script>
+document.getElementById("lang-switch").addEventListener("change", function () {
+  const lang = this.value;
+  i18next.changeLanguage(lang, () => {
+    updateContent();
+    localStorage.setItem('lang', lang);
+  });
+});
+</script>
+        
+    <section class="hero">
+        <div class="overlay"></div>
+        <div class="hero-content">
+          <h1>Força Barça</h1>
+          <p>All the latest on FC Barcelona – News, Stats, & More!</p>
+          <a href="#newsletter" class="cta-button">Join Barcelona FC</a>
+        </div>
+      </section>
+     
+        <div class="hero-content">
+          <h1>Welcome to Barcelona Fan Zone</h1>
+          <p>All the passion. All the glory. All in one place.</p>
+          <div class="hero-buttons">
+            <a href="https://barcatvplus.fcbarcelona.com/en/" target="_blank" class="hero-btn watch-live-btn">Watch Live</a>
+          </div>
+        </div>
+      </section>
+
+  
+  </div>
+</section>
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "firebase/app";
+  import { getAnalytics } from "firebase/analytics";
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBX4XCQTthPCpuNhqFH-QrTbCuzHtTTKaE",
+  authDomain: "barcelona-website-56820.firebaseapp.com",
+  projectId: "barcelona-website-56820",
+  storageBucket: "barcelona-website-56820.firebasestorage.app",
+  messagingSenderId: "897449643146",
+  appId: "1:897449643146:web:bec52de73498a2c42cf173",
+  measurementId: "G-YTK82KBY6T"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+</script>
+
+
+      
+      <section id="top-fans-leaderboard" class="leaderboard-area">
+        <!-- Leaderboard will load here dynamically -->
+      </section>
+      
+      <script>
+        const form = document.querySelector('.newsletter-form');
+      
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          const formData = new FormData(form);
+      
+          fetch(form.action, {
+            method: form.method,
+            body: formData,
+            headers: {
+              'Accept': 'application/json'
+            }
+          }).then(response => {
+            if (response.ok) {
+              form.innerHTML = "<p>🎉 Thank you for subscribing!</p>";
+            } else {
+              form.innerHTML = "<p>⚠️ Oops! Something went wrong. Try again.</p>";
+            }
+          });
+        });
+        <div class="container">
+  <!-- your section here -->
+</div>
+
+      </script>
+      <h1 data-i18n="welcome"></h1>
+      <p data-i18n="tagline"></p>
+      <a class="cta-button" data-i18n="joinNow"></a>
+      
+      <section class="player-of-the-week" id="player">
+        <h2>👑 Player of the Week</h2>
+        <div class="player-card">
+          <img src="download (6).jpeg" alt="Pedri" class="player-img">
+          <div class="player-info">
+            <h3>Pedri</h3>
+            <p class="position">Midfielder | #8</p>
+            <p class="quote">"He controls the game like Xavi and sees the pitch like Iniesta." – Barça Coach</p>
+            <ul class="stats">
+              <li><strong>Key Passes:</strong> 7</li>
+              <li><strong>Goals:</strong> 2</li>
+              <li><strong>Pass Accuracy:</strong> 91%</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      
+      <button id="scrollToTopBtn" title="Go to top">⬆️</button>
+      <section class="player-highlights" id="highlights">
+        <h2>🌟 Key Player Highlights</h2>
+        <div class="player-grid">
+          <div class="player-card">
+            <img src="barclona vs dortmord.jpg" alt="Lewandowski">
+            <h3>Robert Lewandowski</h3>
+            <p>Striker</p>
+            <div class="player-card" onclick="showPlayerModal(this)"
+     data-name="Robert Lewandowski"
+     data-position="Striker"
+     data-bio="Lewandowski is known for his elite goal-scoring, leadership, and technique. One of the best strikers of this era.">
+  <div class="stats">
+    <span>⚽ 27 Goals</span>
+    <span>🎯 8 Assists</span>
+    <span>🎽 31 Apps</span>
+  </div>
+</div>
+<div id="playerModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <h2 id="modalName"></h2>
+      <p id="modalPosition"></p>
+      <p id="modalBio"></p>
+    </div>
+  </div>
+  
+          <div class="player-card">
+            <img src="gettyimages-2209421178-1024x1024.jpg" alt="Pedri">
+            <h3>Pedri</h3>
+            <p>Midfielder</p>
+            <div class="stats">
+              <span>⚽ 5 Goals</span>
+              <span>🎯 10 Assists</span>
+              <span>🎽 29 Apps</span>
+            </div>
+          </div>
+      <section id="fan-profile" class="fan-profile">
+  <img id="avatar" src="" alt="Profile picture">
+  <h2 id="fanName"></h2>
+  <p id="fanBio"></p>
+  <p id="fanPoints">Points: 0</p>
+</section>
+<div class="player-card">
+  <div class="card-inner">
+    <div class="card-front">
+      <img src="gavi.jpg" alt="Gavi" />
+      <h3>Gavi</h3>
+    </div>
+    <div class="card-back">
+      <p>Midfielder. Born to control the pitch. 🔥</p>
+    </div>
+  </div>
+</div>
+<nav aria-label="Main navigation">
+  ...
+</nav>
+
+          <!-- Add more player cards as needed -->
+        </div>
+      </section>
+      <section class="match-gallery" id="gallery">
+        <h2>📸 Match Moments</h2>
+        <div class="gallery-grid">
+          <div class="gallery-item">
+            <img src="download (3).jpeg" alt="Team Photo">
+          </div>
+          <div class="gallery-item">
+            <img src="download (2).jpeg" alt="Lewandowski Goal">
+          </div>
+          <div class="gallery-item">
+            <img src="download (4).jpeg" alt="Pedri Pass">
+          </div>
+          <!-- Add more as needed -->
+        </div>
+      </section>
+      
+      <section class="upcoming-matches" id="upcoming">
+        <h2>📅 Upcoming Matches</h2>
+        <div class="matches-grid">
+          <div class="match-card">
+            <h3>vs Real Madrid</h3>
+            <p>📍 Santiago Bernabéu</p>
+            <p>🕒 April 21, 2025 – 9:00 PM</p>
+            <p class="countdown" data-date="2025-04-21T21:00:00">⏳ Loading...</p>
+          </div>
+          <div class="match-card">
+            <h3>vs Atlético Madrid</h3>
+            <p>📍 Spotify Camp Nou</p>
+            <p>🕒 April 27, 2025 – 8:00 PM</p>
+            <p class="countdown" data-date="2025-04-27T20:00:00">⏳ Loading...</p>
+          </div>
+        </div>
+      </section>
+      
+      
+      <section class="club-history" id="history">
+        <h2>🏟️ Our Legacy</h2>
+        <div class="history-grid">
+          <div class="history-card">
+            <img src="download (1).jpeg" alt="Camp Nou">
+            <div class="history-text">
+              <h3>Spotify Camp Nou</h3>
+              <p>The heart of FC Barcelona. With a capacity of 99,354, it has witnessed legendary nights and unforgettable goals since 1957.</p>
+            </div>
+          </div>
+          
+          <div class="history-card">
+            <img src="celebrate.jpg" alt="Trophies">
+            <div class="history-text">
+              <h3>Glory & Trophies</h3>
+              <p>5x Champions League, 27x La Liga, and a legacy of beautiful football that changed the world. Barça is more than a club.</p>
+            </div>
+          </div>
+      
+          <div class="history-card">
+            <img src="download.jpeg" alt="Messi Era">
+            <div class="history-text">
+              <h3>Legends Among Us</h3>
+              <p>From Johan Cruyff to Messi, Iniesta, and Xavi — players who defined generations and inspired the world.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="social-feeds" id="social">
+        <h2>📲 Stay Connected with Barça</h2>
+        <div class="social-grid">
+      
+          <!-- Twitter Feed -->
+          <div class="social-box">
+            <h3>Twitter</h3>
+            <a class="twitter-timeline" data-height="400" href="https://twitter.com/FCBarcelona?ref_src=twsrc%5Etfw">
+              Tweets by @FCBarcelona
+            </a>
+          </div>
+      
+          <!-- Instagram Embed -->
+          <div class="social-box insta-box">
+            <h3>Instagram</h3>
+            <iframe src="https://www.instagram.com/fcbarcelona/embed" width="100%" height="400" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+          </div>
+      
+          <!-- Facebook Page Plugin -->
+          <div class="social-box fb-box">
+            <h3>Facebook</h3>
+            <div class="fb-page" 
+                 data-href="https://www.facebook.com/fcbarcelona/" 
+                 data-tabs="timeline" 
+                 data-width="" 
+                 data-height="400" 
+                 data-small-header="false" 
+                 data-adapt-container-width="true" 
+                 data-hide-cover="false" 
+                 data-show-facepile="true">
+              <blockquote cite="https://www.facebook.com/fcbarcelona/" class="fb-xfbml-parse-ignore">
+                <a href="https://www.facebook.com/fcbarcelona/">FC Barcelona</a>
+              </blockquote>
+            </div>
+          </div>
+      
+        </div>
+      </section>
+      <section id="top-fans-leaderboard" class="leaderboard-area">
+        <!-- Leaderboard will load here dynamically -->
+      </section>
+      <div id="profileBadges" class="badges-container">
+        <!-- Badges will be loaded dynamically -->
+      </div>
+            
+      <section class="comments">
+        <h2>Fan Comments 💬</h2>
+        <form id="comment-form">
+          <input type="text" id="name" placeholder="Your name" required />
+          <textarea id="comment" placeholder="What do you think?" required></textarea>
+          <button type="submit">Post</button>
+        </form>
+        <ul id="comment-list"></ul>
+      </section>
+      
+      
+      
+      
+ <!-- Newsletter -->
+ <section class="newsletter">
+    <h2>Stay Updated</h2>
+    <p>Subscribe to get the latest Barça news in your inbox!</p>
+    <form>
+        <input type="email" placeholder="Enter your email" required>
+        <button type="submit">Subscribe</button>
+    </form>
+    <!-- Main Content Placeholder -->
+    <main>
+        <section id="latest-news">
+            <h2>Latest News</h2>
+            <p>Here you will find all the latest FC Barcelona news.</p>
+        </section>
+
+        <section id="standings">
+            <h2>La Liga Standings</h2>
+            <p>Current standings will be shown here.</p>
+        </section>
+    </main>
+  
+      
+   
+    </section>
+    <script>
+        function showPlayerModal(card) {
+          document.getElementById("modalName").textContent = card.dataset.name;
+          document.getElementById("modalPosition").textContent = card.dataset.position;
+          document.getElementById("modalBio").textContent = card.dataset.bio;
+          document.getElementById("playerModal").style.display = "block";
+        }
+      
+        function closeModal() {
+          document.getElementById("playerModal").style.display = "none";
+        }
+      
+        // Optional: Close modal when clicking outside content
+        window.onclick = function(event) {
+          const modal = document.getElementById("playerModal");
+          if (event.target === modal) {
+            modal.style.display = "none";
+          }
+        }
+      </script>
+      <script>
+        const toggleBtn = document.getElementById("themeToggle");
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      
+        // Check saved theme
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
+          document.body.classList.add("dark-mode");
+          toggleBtn.textContent = "☀️";
+        }
+      
+        toggleBtn.addEventListener("click", () => {
+          document.body.classList.toggle("dark-mode");
+          const isDark = document.body.classList.contains("dark-mode");
+          toggleBtn.textContent = isDark ? "☀️" : "🌙";
+          localStorage.setItem("theme", isDark ? "dark" : "light");
+        });
+      </script>
+      <script>
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImg = document.getElementById("lightbox-img");
+      
+        document.querySelectorAll(".gallery-item img").forEach(img => {
+          img.addEventListener("click", () => {
+            lightboxImg.src = img.src;
+            lightbox.style.display = "flex";
+          });
+        });
+      
+        function closeLightbox() {
+          lightbox.style.display = "none";
+        }
+      
+        window.addEventListener("click", e => {
+          if (e.target === lightbox) closeLightbox();
+        });
+      </script>
+      
+      <div id="lightbox" class="lightbox">
+        <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
+        <img id="lightbox-img" src="" alt="Expanded Match Moment">
+      </div>
+      <script>
+        function updateCountdowns() {
+          const countdownElements = document.querySelectorAll('.countdown');
+          countdownElements.forEach(el => {
+            const matchDate = new Date(el.getAttribute('data-date'));
+            const now = new Date();
+            const diff = matchDate - now;
+      
+            if (diff <= 0) {
+              el.textContent = "🟢 Match in progress or finished";
+              return;
+            }
+      
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / (1000 * 60)) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
+      
+            el.textContent = `⏳ ${days}d ${hours}h ${minutes}m ${seconds}s`;
+          });
+        }
+      
+        setInterval(updateCountdowns, 1000);
+        updateCountdowns(); // Initial call
+      </script>
+      <script>
+        const commentForm = document.getElementById("commentForm");
+        const commentSection = document.getElementById("commentSection");
+      
+        commentForm.addEventListener("submit", function(e) {
+          e.preventDefault();
+          const username = document.getElementById("username").value.trim();
+          const commentText = document.getElementById("commentText").value.trim();
+      
+          if (username && commentText) {
+            const comment = document.createElement("div");
+            comment.classList.add("comment");
+            comment.innerHTML = `<strong>${username}</strong><p>${commentText}</p>`;
+            commentSection.prepend(comment);
+      
+            // Reset form
+            commentForm.reset();
+          }
+        });
+      </script>
+      <script>
+        const commentForm = document.getElementById("commentForm");
+        const commentSection = document.getElementById("commentSection");
+      
+        // Load saved comments from localStorage
+        const savedComments = JSON.parse(localStorage.getItem("barcaComments")) || [];
+        savedComments.forEach(displayComment);
+      
+        commentForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+          const username = document.getElementById("username").value.trim();
+          const commentText = document.getElementById("commentText").value.trim();
+      
+          if (username && commentText) {
+            const newComment = { username, commentText, timestamp: new Date().toISOString() };
+      
+            // Save to localStorage
+            savedComments.unshift(newComment); // newest on top
+            localStorage.setItem("barcaComments", JSON.stringify(savedComments));
+      
+            displayComment(newComment, true);
+            commentForm.reset();
+          }
+        });
+      
+        function displayComment(commentObj, prepend = false) {
+          const comment = document.createElement("div");
+          comment.classList.add("comment");
+          comment.innerHTML = `
+            <strong>${commentObj.username}</strong>
+            <p>${commentObj.commentText}</p>
+            <small>${new Date(commentObj.timestamp).toLocaleString()}</small>
+          `;
+      
+          if (prepend) {
+            commentSection.prepend(comment);
+          } else {
+            commentSection.appendChild(comment);
+          }
+        }
+      </script>
+      <script>
+        // Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyAfnpQg_8N_xDtgW5xaE9voyNwD6DjC6W0",
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.8.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries   
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyAfnpQg_8N_xDtgW5xaE9voyNwD6DjC6W0",
+    authDomain: "website-5f3c2.firebaseapp.com",
+    projectId: "website-5f3c2",
+    storageBucket: "website-5f3c2.firebasestorage.app",
+    messagingSenderId: "913589989589",
+    appId: "1:913589989589:web:4a409d41b23ee352dfb25c",
+    measurementId: "G-D2T7NBLKSE"
+  };
+
+
+
+
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
+      </script>
+      <!-- Firebase Auth -->
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js"></script>
+      <script>
+        // Replace with your actual config
+        // Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyBlYVAQ2b1aHQfIgsPZGto6qmE7Mfp5IHQ",
+  authDomain: "barcelona-fan-zone.firebaseapp.com",
+  projectId: "barcelona-fan-zone",
+  storageBucket: "barcelona-fan-zone.firebasestorage.app",
+  messagingSenderId: "157839652605",
+  appId: "1:157839652605:web:1d4a2f4ec2bb5a0d8b7094"
+};
+      
+        // Init Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+      
+        const commentForm = document.getElementById("commentForm");
+        const commentSection = document.getElementById("commentSection");
+      
+        // Submit comment
+        commentForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const username = document.getElementById("username").value.trim();
+          const commentText = document.getElementById("commentText").value.trim();
+      
+          if (username && commentText) {
+            const newCommentRef = db.ref("comments").push();
+            newCommentRef.set({
+              username,
+              commentText,
+              timestamp: Date.now()
+            });
+      
+            commentForm.reset();
+          }
+        });
+      
+        // Listen for new comments
+        db.ref("comments").on("child_added", (snapshot) => {
+          const commentObj = snapshot.val();
+          displayComment(commentObj);
+        });
+      
+        // Display comment
+        function displayComment({ username, commentText, timestamp }) {
+          const comment = document.createElement("div");
+          comment.classList.add("comment");
+          comment.innerHTML = `
+            <strong>${username}</strong>
+            <p>${commentText}</p>
+            <small>${new Date(timestamp).toLocaleString()}</small>
+          `;
+          commentSection.prepend(comment);
+        }
+      </script>
+      
+      <script type="module" src="firebase-app.js"></script>
+      <script type="module">
+        // paste the cleaned code here
+      </script>
+      <script type="module" src="firebase-auth.js"></script>      
+      
+      
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTopBtn" title="Go to top">↑</button>
+    <script src="bar.js" defer></script>
+    <script type="module" src="bar.js"></script>
+    <script>
+      const googleLogin = document.getElementById('google-login');
+      const guestLogin = document.getElementById('guest-login');
+      const logoutBtn = document.getElementById('logout-btn');
+      const userInfo = document.getElementById('user-info');
+    
+      // Google Login
+      googleLogin.addEventListener('click', () => {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        auth.signInWithPopup(provider)
+          .then((result) => {
+            showUser(result.user);
+          })
+          .catch((error) => {
+            alert(error.message);
+          });
+      });
+    
+      // Guest Login
+      guestLogin.addEventListener('click', () => {
+        auth.signInAnonymously()
+          .then(() => {
+            showUser({ displayName: "Guest", email: "Anonymous User" });
+          })
+          .catch((error) => {
+            alert(error.message);
+          });
+      });
+    
+      // Logout
+      logoutBtn.addEventListener('click', () => {
+        auth.signOut().then(() => {
+          userInfo.innerText = '';
+          logoutBtn.style.display = 'none';
+          googleLogin.style.display = 'inline-block';
+          guestLogin.style.display = 'inline-block';
+        });
+      });
+    
+      // Show user info
+      function showUser(user) {
+        userInfo.innerText = `Logged in as: ${user.displayName || user.email}`;
+        logoutBtn.style.display = 'inline-block';
+        googleLogin.style.display = 'none';
+        guestLogin.style.display = 'none';
+      }
+    
+      // Keep user logged in on refresh
+      auth.onAuthStateChanged(user => {
+        if (user) {
+          showUser(user);
+        }
+      });
+      <script type="module" src="bar.js"></script>
+      <script type="module" src="firebase-app.js"></script>
+    </script>
+    <script src="bar.js"></script> 
+    <script type="module" src="bar.js"></script>
+    <script type="module" src="scripts/main.js"></script>
+</body>
+
+<!-- Twitter Script -->
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<!-- Facebook SDK -->
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous"
+  src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v17.0"
+  nonce="Barca2025"></script>
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h4>Quick Links</h4>
+      <a href="#home">Home</a>
+      <a href="#highlights">Highlights</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#players">Players</a>
+      <a href="#upcoming">Upcoming</a>
+    </div>
+    
+    <div class="footer-section">
+      <h4>Connect</h4>
+      <a href="mailto:contact@fcbarcafansite.com">📧 Email Us</a>
+      <a href="https://twitter.com/fcbarcelona" target="_blank">🐦 Twitter</a>
+      <a href="https://instagram.com/fcbarcelona" target="_blank">📸 Instagram</a>
+    </div>
+
+    <div class="footer-section">
+      <h4>Back to Top</h4>
+      <button onclick="scrollToTop()" class="scroll-top">⬆️ Top</button>
+    </div>
+  </div>
+
+  <p class="footer-bottom">© 2025 FC Barcelona Fan Site | For the Love of the Game 🔵🔴</p>
+</footer>
+
+
+</html>
